@@ -1,6 +1,23 @@
+/* Pereyra Ian
+Div D IF 01
+*/
+/* Al ingresar una edad que sea igual a 15, mostrar el mensaje "niña bonita".*/
+
 function mostrar()
 {
-	//tomo la edad  
-	alert("ok");
+	var edad;
 
-}//FIN DE LA FUNCIÓN
+	edad = document.getElementById('txtIdEdad').value;
+	edad = parseInt(edad);
+
+	if(edad == 15)
+	{
+		alert("niña bonita");
+	}
+}
+
+
+/* 
+| = Alt (der)  1
+& = shift 6
+*/
