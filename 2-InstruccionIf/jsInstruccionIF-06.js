@@ -18,7 +18,7 @@ function mostrar()
 	}
 	else
 	{
-		if(edad > 12 && edad < 18)
+		if(edad<18)   //Antes era: if(edad > 12 && edad < 18)
 		{
 			mensaje = "Usted es adolescente.";
 		}
