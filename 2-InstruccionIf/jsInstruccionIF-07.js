@@ -24,30 +24,6 @@ function mostrar()
 }*/
 
 /* 
-1. Ejercicio 07 BIS V1 (Realizar en los archivos  del ejercicio 07 del IF)
-a. si es menor de 13 , mostrar el mensaje “feliz día”.
-b. Si es adolescente el mensaje es “usted es adolescente”)
-  si tiene 17 años además mostrar el mensaje “último año!!!”
-c. Si es mayor de edad mostrar el mensaje “tienes edad de laburar”.
-  si tiene 33 años , además mostrar el mensaje “como cristo”
-  si tiene más de 60 años, además mostrar el mensaje “A jubilarse”.
-  si tiene 88, además mostrar el mensaje “lindo número''
-d. Si la edad es par , además mostrar , “sos par!!”
-
-2. Ejercicio 07 BIS V2(Realizar en los archivos  del ejercicio 07 del IF)
-además de los datos ya ingresados , solicitar el nombre .
-a. si es menor de 13 , , mostrar el mensaje “feliz día”.
-b. Si es adolescente el mensaje es “usted es adolexcente”)
- si tiene 17 años además mostrar el mensaje “último año!!!”
-c. Si es mayor de edad mostrar el mensaje “tienes edad de laburar”.
- si tiene 33 años , además mostrar el mensaje “como cristo”
- si tiene más de 60 años, además mostrar el mensaje “A jubilarse”.
- si tiene 88, además mostrar el mensaje “lindo número''
-d. si la edad es par , además mostrar , “sos par!!”.
-e. si se llama ‘Violeta’ y es adolescente , sumar el mensaje ‘como un color!!’
-f. si se llama ‘Ricardo’ y es un menor a 13 , sumar el mensaje ‘muy chiquito para ese nombre’
-g. si se llama ‘Alfredo’ y esta para jubilarse , sumar el mensaje ‘como el de 	QUEEN’	
-
 3. Ejercicio 07 BIS V3(Realizar en los archivos  del ejercicio 07 del IF)
  además de los datos ya ingresados , solicitar el nombre .
 a. si es menor de 13 , , mostrar el mensaje “feliz día”.
@@ -112,11 +88,11 @@ function mostrar()
 		}
 		else
 		{
-			if(edad > 17)
-			{
-				mensaje = "Tenés edad de laburar";
+			mensaje = "Tenés edad de laburar";
 
-				if(estadoCivilIngresado == "Soltero" && edad < 61)
+			if(edad < 61)
+			{
+				if(estadoCivilIngresado == "Soltero")
 				{
 					mensaje = mensaje + ", a salir";
 				}
@@ -124,23 +100,22 @@ function mostrar()
 				{
 					mensaje = mensaje + ", como Cristo";
 				}
-				else
-				{
-					if(edad > 60)
-					{
-						mensaje = mensaje + ", a jubilarse";
+			}	
+			else
+			{
+				mensaje = mensaje + ", a jubilarse";
 
-						if(edad == 88)
-						{
-							mensaje = mensaje + ". Lindo número";
-						}
-						if(nombre == "Alfredo")
-						{
-							mensaje = mensaje + ", como el de Queen";
-						}
-					}
+				if(edad == 88)
+				{
+					mensaje = mensaje + ". Lindo número";
 				}
+				if(nombre == "Alfredo")
+				{
+					mensaje = mensaje + ", como el de Queen";
+				}
+				
 			}
+			
 		}
 		if(estadoCivilIngresado == "Casado")
 		{
