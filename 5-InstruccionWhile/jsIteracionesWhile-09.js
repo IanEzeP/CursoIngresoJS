@@ -12,17 +12,17 @@ function mostrar()
 	var numeroMinimo;
 	var respuesta;
 	
-	banderaDelPrimero = "es el primero";
-	respuesta = 'si';
+	banderaDelPrimero = false;
+	respuesta = true;
 
-	while(respuesta=="si")
+	while(respuesta == true)
 	{
 		numeroIngresado = prompt('Ingrese un número');
 		numeroIngresado = parseInt(numeroIngresado);
 
-		if(banderaDelPrimero == "es el primero")
+		if(banderaDelPrimero == false)
 		{
-			banderaDelPrimero = "ya no es el primero";
+			banderaDelPrimero = true;
 			numeroMaximo = numeroIngresado;
 			numeroMinimo = numeroIngresado;
 		}
@@ -41,14 +41,19 @@ function mostrar()
 			}
 		}
 
-		respuesta = prompt("¿Desea continuar? (si o no)");
-
-		if(respuesta != 'si' && respuesta != 'no')
-		{
-			respuesta = prompt("Respuesta invalida, ¿Desea continuar?  (si o no)");
-		}
+		respuesta = confirm("¿Desea continuar?");
 	}
 
 	document.getElementById('txtIdMaximo').value = numeroMaximo;
 	document.getElementById('txtIdMinimo').value = numeroMinimo;
+
+	/*if(numeroIngresado < numeroMinimo || banderaDelPrimero == false)
+	{
+		numeroMinimo = numeroIngresado;
+	}
+	if(numeroIngresado > numeroMaximo || banderaDelPrimero == false)
+	{
+		numeroMaximo = numeroIngresado;
+		banderaDelPrimero = true;
+	}*/
 }

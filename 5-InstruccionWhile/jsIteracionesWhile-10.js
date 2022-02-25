@@ -11,7 +11,9 @@ mostrar:
 6-Cantidad de números pares.
 7-Promedio de positivos.
 8-Promedios de negativos.
-9-Diferencia entre positivos y negativos, (positivos-negativos). */
+9-Diferencia entre positivos y negativos, (positivos-negativos).
+10- De los positivos el mas grande.
+11- De los negativos el mas chico. */
 
 function mostrar()
 {
@@ -21,83 +23,128 @@ function mostrar()
 	var promedioPositivos;
 	var promedioNegativos;
 	var diferenciaPositivosNegativos;
+	/*var banderaPositivoMax;
+	var banderaNegativoMin;*/
+	var numeroMaximoPositivo;
+	var numeroMinimoNegativo;
 
 	var sumaNegativos = 0;
 	var sumaPositivos = 0;
-	var acumuladorPositivos = 0;
-	var acumuladorNegativos = 0;
-	var acumuladorDeCeros = 0;
-	var acumuladorDePares = 0;
+	var contadorPositivos = 0;
+	var contadorNegativos = 0;
+	var contadorDeCeros = 0;
+	var contadorDePares = 0;
 
-	respuesta = "si";
+	respuesta = true;
+	/*banderaPositivoMax = true;
+	banderaNegativoMin = true;*/
 
-	while(respuesta == "si")
+	while(respuesta == true)
 	{
-		numeroIngresado = prompt('Ingrese un numero:');
+		numeroIngresado = prompt('Ingrese un número:');
 		numeroIngresado = parseInt(numeroIngresado);
 
-		if(numeroIngresado == 0)
+		while(isNaN(numeroIngresado)==true)
 		{
-			acumuladorDeCeros++;
+			numeroIngresado = prompt('Por favor ingrese un número:');
+			numeroIngresado = parseInt(numeroIngresado);
+		}
+
+		if(numeroIngresado > 0)
+		{
+			sumaPositivos = sumaPositivos + numeroIngresado; //sumaPositivos +=numeroIngresado
+			contadorPositivos++;
+
+			if(contadorPositivos == 1 || numeroIngresado > numeroMaximoPositivo)
+			{
+				numeroMaximoPositivo = numeroIngresado;
+			}
 		}
 		else
 		{	
 			if(numeroIngresado < 0)
 			{
-				sumaNegativos = sumaNegativos + numeroIngresado;
-				acumuladorNegativos++;
+				sumaNegativos = sumaNegativos + numeroIngresado; //sumaNegativos +=numeroIngresado
+				contadorNegativos++;
+
+				if(contadorNegativos == 1 || numeroIngresado < numeroMinimoNegativo)
+				{
+					numeroMinimoNegativo = numeroIngresado;
+				}
 			}
 			else
 			{
-				sumaPositivos = sumaPositivos + numeroIngresado;
-				acumuladorPositivos++;
+				contadorDeCeros++;
 			}
 		}
 
 		calculoPar = numeroIngresado % 2;
 		if(calculoPar == 0)
 		{
-			acumuladorDePares++;
+			contadorDePares++;
 		}
 
-		respuesta = prompt("¿Desea continuar? (si o no)");
-		if(respuesta != 'si' && respuesta != 'no')
-		{
-			respuesta = prompt("Respuesta invalida, ¿Desea continuar? (si o no)");
-		}
+		respuesta = confirm("¿Desea continuar?");
 	}
-
-	promedioPositivos = sumaPositivos / acumuladorPositivos;
-	promedioNegativos = sumaNegativos / acumuladorNegativos;
-	diferenciaPositivosNegativos = sumaPositivos + sumaNegativos;
+	
+	diferenciaPositivosNegativos = sumaPositivos - sumaNegativos;
 
 	document.write("La suma de negativos es: " + sumaNegativos + "<br>");
 	document.write("La suma de positivos es: " + sumaPositivos + "<br>");
-	document.write("La cantidad de positivos es: " + acumuladorPositivos + "<br>");
-	document.write("La cantidad de negativos es: " + acumuladorNegativos + "<br>");
-	document.write("La cantidad de ceros es: " + acumuladorDeCeros + "<br>");
-	document.write("La cantidad de numeros pares es: " + acumuladorDePares + "<br>");
-	document.write("El promedio de los numeros postivos es: " + promedioPositivos + "<br>");
-	document.write("El promedio de los numeros negativos es: " + promedioNegativos + "<br>");
-	document.write("La diferencia entre positivos y negativos: " + diferenciaPositivosNegativos); 
+	document.write("La cantidad de positivos es: " + contadorPositivos + "<br>");
+	document.write("La cantidad de negativos es: " + contadorNegativos + "<br>");
+	document.write("La cantidad de ceros es: " + contadorDeCeros + "<br>");
+	document.write("La cantidad de números pares es: " + contadorDePares + "<br>");
+	if(contadorPositivos>0)
+	{
+		promedioPositivos = sumaPositivos / contadorPositivos;
+		document.write("El promedio de los números positivos es: " + promedioPositivos + "<br>");
+	}
+	else
+	{
+		document.write("El promedio de los números positivos no se pudo calcular." + "<br>");
+	}
+
+	if(contadorNegativos>0)
+	{
+		promedioNegativos = sumaNegativos / contadorNegativos;
+		document.write("El promedio de los números positivos es: " + promedioNegativos + "<br>");
+	}
+	else
+	{
+		document.write("El promedio de los números negativos no se pudo calcular." + "<br>");
+	}
+	document.write("La diferencia entre positivos y negativos: " + diferenciaPositivosNegativos + "<br>");
+	document.write("El maximo de los numeros positivos es " + numeroMaximoPositivo + "<br>"); 
+	document.write("El minimo de los numeros negativos es " + numeroMinimoNegativo );
 }
 
 
 	/*switch(numeroIngresado)
 	{
 		case 0:
-			acumuladorDeCeros++;
+			contadorDeCeros++;
 			break;
 		default:
 			if(numeroIngresado < 0)
 			{
 				sumaNegativos = sumaNegativos + numeroIngresado;
-				acumuladorNegativos++;
+				contadorNegativos++;
 			}
 			else
 			{
 				sumaPositivos = sumaPositivos + numeroIngresado;
-				acumuladorPositivos++;
+				contadorPositivos++;
 			}
 			break;
 	}*/
+	/*if(numeroIngresado < numeroMinimoNegativo || banderaNegativoMin == true)
+		{
+			numeroMinimoNegativo = numeroIngresado;
+			banderaNegativoMin = false;
+		}
+		if(numeroIngresado > numeroMaximoPositivo || banderaPositivoMax == true)
+		{
+			numeroMaximoPositivo = numeroIngresado;
+			banderaPositivoMax = false;
+		}*/

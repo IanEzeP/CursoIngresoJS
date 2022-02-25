@@ -13,9 +13,9 @@ function mostrar()
 
 	sumaPositivos = 0;
 	multiplicacionNegativos = 1;
-	respuesta = 'si';
+	respuesta = true;
 
-	while(respuesta == 'si')
+	while(respuesta == true)
 	{
 		numeroIngresado = prompt('Ingrese un número entero');
 		numeroIngresado = parseInt(numeroIngresado);
@@ -29,12 +29,7 @@ function mostrar()
 			multiplicacionNegativos = multiplicacionNegativos * numeroIngresado;
 		}
 
-		respuesta = prompt('¿Desea ingresar otro numero? (si o no)');
-
-		if(respuesta != 'si' && respuesta != 'no')
-		{
-			respuesta = prompt('Respuesta invalida. ¿Desea ingresar otro numero? (si o no)');
-		}
+		respuesta = confirm('¿Desea ingresar otro numero?');
 	}
 
 	document.getElementById('txtIdSuma').value = sumaPositivos;

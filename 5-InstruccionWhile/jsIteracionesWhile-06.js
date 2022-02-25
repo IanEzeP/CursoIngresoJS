@@ -9,8 +9,8 @@ function mostrar()
 	var acumulador;
 	var numeroIngresado;
 
-	contador=0;
-	acumulador=0;
+	contador = 0;
+	acumulador = 0;
 	
 	while(contador < 5)
 	{
@@ -21,5 +21,5 @@ function mostrar()
 	}
 	
 	document.getElementById('txtIdSuma').value = acumulador;
-	document.getElementById('txtIdPromedio').value = acumulador /5;
+	document.getElementById('txtIdPromedio').value = acumulador / 5;
 }

@@ -7,34 +7,31 @@ e informar la suma acumulada y el promedio.
 
 function mostrar()
 {
-	var contador;
-	var acumulador;
+	var contadorIngresos;
+	var acumuladorSuma;
 	var respuesta;
 	var numeroIngresado;
 
-	contador=0;
-	acumulador=0;
-	respuesta='si';
+	contadorIngresos = 0;
+	acumuladorSuma = 0;
+	respuesta = true;
 
-	while(respuesta == 'si')
+	while(respuesta == true)
 	{
 		numeroIngresado = prompt("Ingrese un numero");
 		numeroIngresado = parseInt(numeroIngresado);
-		acumulador = acumulador + numeroIngresado;
-		contador++;
-		respuesta = prompt("Desea ingresar un nuevo numero? (si o no)")
 
-		if(respuesta != 'si' && respuesta != 'no')
-		{
-			respuesta = prompt('Respuesta invalida. Desea ingresar un nuevo numero? (si o no)');
-		}
+		acumuladorSuma = acumuladorSuma + numeroIngresado;
+		contadorIngresos++;
+
+		respuesta = confirm("Desea ingresar un nuevo numero? (si o no)");
 	}
 	
-	document.getElementById('txtIdSuma').value = acumulador;
-	document.getElementById('txtIdPromedio').value = acumulador / contador;
+	document.getElementById('txtIdSuma').value = acumuladorSuma;
+	document.getElementById('txtIdPromedio').value = acumuladorSuma / contadorIngresos;
 
-}*/
-
+}
+*/
 
 /*Ejercicio While 07 V1 (Realizar en los archivos del ejercicio 07 del WHILE)
 Realizar el algoritmo que permita el ingreso por prompt de
@@ -81,7 +78,7 @@ function mostrar()
 	var porcentajeMayoresFiebreSobreEnfermos;
 	var porcentajeMayoresFiebreSobreAlumnos;
 
-	var contador = 0;
+	var contador;
 	var alumnosConFiebre = 0;
 	var mayoresConFiebre = 0;
 	var alturaAcumulador = 0;
@@ -103,23 +100,14 @@ function mostrar()
 	var banderaAprobada = true;	
 	var banderaMuyAlto = true;
 	
-	while(contador < 5)
+	for(contador = 0; contador < 5; contador++)
 	{
-		nombre = prompt("Ingrese su nombre:");
-		
 		altura = prompt("Ingrese su altura en centímetros entre 0cm y 250cm:");
 		altura = parseInt(altura);
 		while(altura < 0 || altura > 250)
 		{
 			altura = prompt("Por favor ingrese un valor posible de altura (0cm a 250cm):");
 			altura = parseInt(altura);
-		}
-		alturaAcumulador = alturaAcumulador + altura;
-
-		if(altura > personaMasAlta)
-		{
-			personaMasAlta = altura;
-			nombreGuardado = nombre; 
 		}
 
 		edad = prompt("Ingrese su edad:");
@@ -138,6 +126,30 @@ function mostrar()
 			temperatura = parseInt(temperatura);
 		}
 
+		sexo = prompt("Ingrese 'f', 'm' o 'nb' según su género:");
+		while(sexo != 'f' && sexo != 'm' && sexo != 'nb')
+		{
+			sexo = prompt("Opcion invalida, por favor ingrese 'f', 'm' o 'nb':");
+		}
+
+		nota = prompt("Ingrese su calificación entre 0 y 10:");
+		nota = parseInt(nota);
+		while(nota < 1 || nota > 10)
+		{
+			nota = prompt("Nota improbable, ingrese una calificacion entre 0 y 10:");
+			nota = parseInt(nota);
+		}
+
+		nombre = prompt("Ingrese su nombre:");
+
+		alturaAcumulador = alturaAcumulador + altura;
+
+		if(altura > personaMasAlta)
+		{
+			personaMasAlta = altura;
+			nombreGuardado = nombre; 
+		}
+
 		if(temperatura > 37) 
 		{
 			alumnosConFiebre++;
@@ -152,13 +164,39 @@ function mostrar()
 			}
 		}
 
-		nota = prompt("Ingrese su calificación entre 0 y 10:");
-		nota = parseInt(nota);
-		while(nota < 1 || nota > 10)
+		switch(sexo)
 		{
-			nota = prompt("Nota improbable, ingrese una calificacion entre 0 y 10:");
-			nota = parseInt(nota);
+			case 'f':
+				sexoAcumuladorF++;	
+				if(altura > 190)
+				{
+					acumuladorDeMujeresAltas++;	
+				}
+				if(banderaAprobada == true && nota > 6)
+				{
+					nombreMujerGuardada = nombre;
+					banderaAprobada = false;
+				}
+				break;
+			case 'm':
+				sexoAcumuladorM++;
+				if(banderaDesaprobado == true && nota < 7 && altura < 160)
+				{
+					nombreHombreGuardado = nombre;
+					banderaDesaprobado = false;
+				}
+				if(banderaMuyAlto == true && altura > 200)
+				{
+					notaHombreAltoGuardado = nota;
+					nombreHombreAltoGuardado = nombre;
+					banderaMuyAlto = false;
+				}
+				break;
+			default:
+				sexoAcumuladorNB++;
+				break;
 		}
+
 		if(nota > 6)
 		{
 			notaAcumuladorAprobado++;
@@ -168,55 +206,7 @@ function mostrar()
 		{
 			notaAcumuladorDesaprobado++;
 		}
-
-		sexo = prompt("Ingrese 'f', 'm' o 'nb' según su género:");
-		while(sexo != 'f' && sexo != 'm' && sexo != 'nb')
-		{
-			sexo = prompt("Opcion invalida, por favor ingrese 'f', 'm' o 'nb':");
-		}
-		switch(sexo)
-		{
-			case 'f':
-				sexoAcumuladorF++;	
-				if(altura > 190)
-				{
-					acumuladorDeMujeresAltas++;	
-				}
-				if(banderaAprobada == true)
-				{
-					if(nota > 6)
-					{
-						nombreMujerGuardada = nombre;
-						banderaAprobada = false;
-					}
-				}
-				break;
-			case 'm':
-				sexoAcumuladorM++;
-				if(banderaDesaprobado == true)
-				{
-					if(nota < 7 && altura < 160)
-					{
-						nombreHombreGuardado = nombre;
-						banderaDesaprobado = false;
-					}
-				}
-				if(banderaMuyAlto == true)
-				{
-					if(altura > 200)
-					{
-						notaHombreAltoGuardado = nota;
-						nombreHombreAltoGuardado = nombre;
-						banderaMuyAlto = false;
-					}
-				}
-				break;
-			default:
-				sexoAcumuladorNB++;
-				break;
-		}
-
-		contador++;
+		
 	}
 
 	alturaAcumulador = alturaAcumulador / contador;
@@ -232,34 +222,13 @@ function mostrar()
 	}
 	else
 	{
-		if(sexoAcumuladorM > sexoAcumuladorF && sexoAcumuladorM > sexoAcumuladorNB)
+		if(sexoAcumuladorM > sexoAcumuladorNB)
 		{
 			sexoMayor = "Hay mas alumnos de sexo masculino que femenino y no binario";
 		}
 		else
 		{
-			if(sexoAcumuladorNB > sexoAcumuladorF && sexoAcumuladorNB > sexoAcumuladorM)
-			{
-				sexoMayor = "Hay mas alumnos de sexo no binario que masculino y femenino";
-			}
-			else
-			{
-				if(sexoAcumuladorM == sexoAcumuladorF)
-				{
-					sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y femeninos que no binarios.";
-				}
-				else
-				{
-					if(sexoAcumuladorM == sexoAcumuladorNB)
-					{
-						sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y no binarios que femeninos.";
-					}
-					else
-					{
-						sexoMayor = "Hay misma cantidad mayor de alumnos femeninos y no binarios que masculinos.";
-					}
-				}
-			}
+			sexoMayor = "Hay mas alumnos de sexo no binario que masculino y femenino";
 		}
 	}
 
@@ -282,8 +251,29 @@ function mostrar()
 }
 
 /*
-while(isNaN(numeroIngresado"X")==true)
+while(isNaN(numeroIngresado"X")==true) => while(isNaN(numeroIngresado))
 {
 	lo que haga que itere hasta que el valor sea falso.
 }
-*/
+
+			
+			else
+			{
+				if(sexoAcumuladorM == sexoAcumuladorF)
+				{
+					sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y femeninos que no binarios.";
+				}
+				else
+				{
+					if(sexoAcumuladorM == sexoAcumuladorNB)
+					{
+						sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y no binarios que femeninos.";
+					}
+					else
+					{
+						sexoMayor = "Hay misma cantidad mayor de alumnos femeninos y no binarios que masculinos.";
+					}
+				}
+			}
+		}
+	}*/
