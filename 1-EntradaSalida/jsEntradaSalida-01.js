@@ -5,10 +5,104 @@
 /*
 Al presionar el  botón, 
 se debe mostrar un mensaje como el siguiente "Esto funciona de maravilla" */
-function mostrar()
+/*function mostrar()
 {
 	alert("Esto funciona de maravilla");
+}*/
+
+/*La juguetería El MUNDO DE OCTAVIO nos encarga un programa para conocer qué cantidad de materiales se necesita para la fabricación de distintos juguetes.
+COMETA: 
+AB = Diámetro mayor
+DC = diámetro menor
+BD y BC = lados menores
+AD y AC = lados mayores
+Todos los datos se ingresan por prompt. Pueden usar el mismo html del ejercicio 01 de E/S
+Debemos tener en cuenta que la estructura del cometa estará dada por un perímetro de varillas de plástico y
+los correspondientes entrecruces (DC y AB) del mismo material para mantener la forma del cometa.
+El cometa estará construido con papel de alta resistencia. La cola del mismo se construirá con el mismo papel que el cuerpo 
+y representará un 10% adicional del necesario para el cuerpo.
+Necesitamos saber cuántos Mts de varillas de plástico y cuántos de papel son necesarios para la construcción en masa de 10 cometas.
+Tener en cuenta que los valores de entrada están expresados en Cms.
+
+COMETA BICOLOR
+Ahora necesitamos saber cuánto papel de cada color necesitamos. Las entradas son las mismas.
+*/
+
+function mostrar()
+{
+    var tipoCometa;
+    var diametroMayorAB;
+    var diametroMenorDC;
+    var ladosMayores;
+    var ladosMenores;
+    var longitudTotalVarillas;
+    var medidaExterior;
+    var longitudEnMetros;
+    var perimetroTotal;
+    var totalPapelMonocolor;
+    var totalPapelBicolor;
+    var mensaje;
+
+    diametroMayorAB = prompt("Ingrese el diametro mayor de los cometas (en cms. ningun valor menor a 50 o mayor a 200)");
+    diametroMayorAB = parseInt(diametroMayorAB);
+    while(isNaN(diametroMayorAB) || diametroMayorAB < 50 || diametroMayorAB > 200)
+    {
+        diametroMayorAB = prompt("Error, Reingrese el diametro mayor (en cms. ningun valor menor a 50 o mayor a 200)");
+        diametroMayorAB = parseInt(diametroMayorAB);
+    }
+
+    diametroMenorDC = prompt("Ingrese el diametro menor de los cometas (en cms. ningun valor menor a 40 o superior al diametro mayor)");
+    diametroMenorDC = parseInt(diametroMenorDC);
+    while(isNaN(diametroMenorDC) || diametroMenorDC < 40 || diametroMenorDC > diametroMayorAB) 
+    {
+        diametroMenorDC = prompt("Error, reingrese el diametro menor (en cms. ningun valor menor a 40 o superior al diametro mayor)")
+    }
+
+    ladosMayores = prompt("Ingrese la medida de los lados mayores (en cms, menor al diametro mayor)");
+    ladosMayores = parseInt(ladosMayores);
+    while(isNaN(ladosMayores) || ladosMayores < 20 || ladosMayores > diametroMayorAB)
+    {
+        ladosMayores = prompt("Error, reingrese la medida de los lados mayores (en cms, menor al diametro mayor)");
+        ladosMayores = parseInt(ladosMayores);
+    }
+
+    ladosMenores = prompt("Ingrese la medida de los lados menores (en cms, inferior al diametro menor y los lados mayores");
+    ladosMenores = parseInt(ladosMenores);
+    while(isNaN(ladosMenores) || ladosMenores < 10 || ladosMenores > ladosMayores || ladosMenores > diametroMenorDC)
+    {
+        ladosMenores = prompt("Error, reingrese la medida de los lados menores (en cms, inferior al diametro menor y los lados mayores)");
+        ladosMenores = parseInt(ladosMenores);
+    }
+
+    tipoCometa = prompt("Ingrese el tipo de cometa: (monocolor o bicolor)");
+    tipoCometa = tipoCometa.toLowerCase();
+    while(tipoCometa != "monocolor" && tipoCometa != "bicolor")
+    {
+        tipoCometa = prompt("Error, reingrese el tipo de cometa: (monocolor o bicolor)");
+        tipoCometa = tipoCometa.toLowerCase();
+    }
+
+    medidaExterior = (ladosMayores * 2) + (ladosMenores * 2);
+    longitudTotalVarillas = diametroMayorAB + diametroMenorDC + medidaExterior;
+    longitudEnMetros = longitudTotalVarillas / 100;
+    perimetroTotal = (medidaExterior /100) * 2;
+    totalPapelMonocolor = perimetroTotal + (perimetroTotal *10 /100);
+    
+    if(tipoCometa == "monocolor")
+    {
+        mensaje = "Para la construccion en masa de 10 cometas se necesitaran " + longitudEnMetros + " mts. de varillas y " + totalPapelMonocolor + " mts. de papel.";
+    }
+    else
+    {
+        totalPapelBicolor = totalPapelMonocolor /2;
+        mensaje = "Para la construccion en masa de 10 cometas bicolor se necesitaran " + longitudEnMetros + " mts. de varillas y " + totalPapelBicolor + " mts. de papel de cada color.";
+    }
+
+    alert(mensaje);
 }
+
+
+
 
 /* Pereyra Ian
 Div D Ejercicio 1 (Sabado)

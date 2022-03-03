@@ -33,6 +33,246 @@ function mostrar()
 }
 */
 
+/* Ejercicio While 07 V1 (Realizar en los archivos  del ejercicio 07 del WHILE)
+
+Realizar el algoritmo que permita 
+	el ingreso por prompt de
+	1-alturas en centimetros (validar entre 0 y 250) ,
+	2-la edad (validar)
+	3-temperatura (validar)
+	4-el sexo (validar el sexo “f” o “m” o "nb")
+	5-nota (validar)
+	6-nombre
+	de estudiantes de la UTN hasta que el usuario quiera, 
+	informar :
+
+	a)Cuántas mujeres hay .
+	b)Cuántos con fiebre y cuantos sin fiebre.
+	c)el promedio de edad por sexo.
+
+	d)el primer alumno aprobado
+	e)el nombre y edad de la máxima temperatura registrada
+	f)la altura y nota del no binario mas joven
+
+	g)el nombre de la mujer más alta de las que aprobó
+	h)el porcentaje de personas que desaprobaron sobre el total
+	i)el nombre del primer hombre, que mide menos de 160 cm y está desaprobado.
+
+*/
+/*Pereyra Ian
+Div D Ejercicio 3 (Sabado)*/
+
+function mostrar()
+{
+	var respuesta;
+	var altura;
+	var edad;
+	var temperatura;
+	var sexo;
+	var nota;
+	var nombre;
+	var promedioEdadM;
+	var promedioEdadF;
+	var promedioEdadNB;
+	var porcentajeDesaprobados;
+	var nombreAprobadoGuardado;
+	var nombreMaxTempGuardado;
+	var edadMaxTempGuardado;
+	var alturaJovenGuardado;
+	var notaJovenGuardado;
+	var nombreMujerAltaGuardado;
+	var nombreDesaprobadoGuardado;
+	var totalAlumnos;
+	var banderaAprobado;
+	var banderaJoven;
+	var banderaDesaprobado;
+
+	var maximaAlturaF = 0;
+	var masJovenNB = 0;
+	var maximaTemperatura = 0;
+	var contadorFemenino = 0;
+	var contadorMasculino = 0;
+	var contadorNoBinario = 0;
+	var contadorFiebre = 0;
+	var contadorSano = 0;
+	var contadorDesaprobados = 0;
+	var acumuladorEdadM = 0;
+	var acumuladorEdadF = 0;
+	var acumuladorEdadNB = 0;
+
+	promedioEdadM = 0;
+	promedioEdadF = 0;
+	promedioEdadNB = 0;
+	porcentajeDesaprobados = 0;
+
+	banderaAprobado = true;
+	banderaJoven = true;
+	banderaDesaprobado = true;
+
+	respuesta = true;
+
+	while(respuesta==true)
+	{
+		altura = prompt("Ingrese su altura: (entre 0 y 250cm)");
+		altura = parseInt(altura);
+		while(isNaN(altura)==true || altura < 0 || altura > 250)
+		{
+			altura = prompt("Error! Reingrese su altura: (entre 0 y 250cm)");
+			altura = parseInt(altura);
+		}
+
+		edad = prompt("Ingrese su edad: (17 a 100)");
+		edad = parseInt(edad);
+		while(isNaN(edad)==true || edad < 17 || edad > 100)
+		{
+			edad = prompt("Error! Reingrese su edad: (17 a 100)");
+			edad = parseInt(edad);
+		}
+
+		temperatura = prompt("Ingrese su temperatura: (35º a 45º)");
+		temperatura = parseInt(temperatura);
+		while(isNaN(temperatura)==true || temperatura < 35 || temperatura > 42)
+		{
+			temperatura = prompt("Ingrese una temperatura valida: (35º a 45º)");
+			temperatura = parseInt(temperatura);
+		}
+
+		sexo = prompt("Ingrese su genero: ('f'-'m'-'nb')");
+		sexo = sexo.toLowerCase();
+		while(sexo != 'f' && sexo != 'm' && sexo != 'nb')
+		{
+			sexo = prompt("Error! Reingrese su genero: ('f'-'m'-'nb')");
+			sexo = sexo.toLowerCase();
+		}
+
+		nota = prompt("Ingrese su nota:");
+		nota = parseInt(nota);
+		while(isNaN(nota) || nota < 1 || nota > 10)
+		{
+			nota = prompt("Ingrese una nota valida:");
+			nota = parseInt(nota);
+		}
+
+		nombre = prompt("Ingrese su nombre:");
+		while(nombre=="")
+		{
+			nombre = prompt("Ingrese su nombre:");
+		}
+
+		switch(sexo)
+		{
+			case 'f':
+				contadorFemenino++;
+				acumuladorEdadF += edad;
+				if(altura > maximaAlturaF && nota > 5)
+				{
+					maximaAlturaF = altura;
+					nombreMujerAltaGuardado = nombre;
+				}
+				break;
+			case 'm':
+				contadorMasculino++;
+				acumuladorEdadM += edad;
+				if(banderaDesaprobado == true && nota < 6 && altura < 160)
+				{
+					nombreDesaprobadoGuardado = nombre;
+					banderaDesaprobado = false;
+				}
+				break;
+			default:
+				contadorNoBinario++;
+				acumuladorEdadNB += edad;
+				if(banderaJoven == true || edad < masJovenNB)
+				{
+					masJovenNB = edad;
+					alturaJovenGuardado = altura;
+					notaJovenGuardado = nota;
+					banderaJoven = false;
+				}
+				break;
+
+		}
+
+		if(temperatura > 38)
+		{
+			contadorFiebre++;
+		}
+		else
+		{
+			contadorSano++;
+		}
+
+		if(banderaAprobado == true && nota > 5)
+		{
+			nombreAprobadoGuardado = nombre;
+			banderaAprobado = false;
+		}
+		else
+		{
+			if(nota < 6)
+			{
+				contadorDesaprobados++;
+			}
+		}
+
+		if(temperatura > maximaTemperatura)
+		{
+			maximaTemperatura = temperatura;
+			nombreMaxTempGuardado = nombre;
+			edadMaxTempGuardado = edad;
+		}
+
+		respuesta = confirm("¿Desea ingresar a un nuevo estudiante?");
+	}
+
+	promedioEdadF = acumuladorEdadF / contadorFemenino;
+	promedioEdadM = acumuladorEdadM / contadorMasculino;
+	promedioEdadNB = acumuladorEdadNB / contadorNoBinario;
+
+	totalAlumnos = contadorFemenino + contadorMasculino + contadorNoBinario;
+	porcentajeDesaprobados = contadorDesaprobados / totalAlumnos * 100;
+
+	document.write("La cantidad de mujeres es: " + contadorFemenino + "<br>");
+	document.write("La cantidad de estudiantes con fiebre es " + contadorFiebre + " mientras que la cantidad de estudiantes sanos es " + contadorSano + "<br>");
+	document.write("El promedio de la edad de los alumnos masculinos es " + promedioEdadM + ", el de los femeninos es " + promedioEdadF + ", y el de los no binarios es " + promedioEdadNB + "<br>");
+	document.write("El primer alumno aprobado es " + nombreAprobadoGuardado + "<br>");
+	document.write("El nombre del alumno con la mayor temperatura es " + nombreMaxTempGuardado + " y su edad es " + edadMaxTempGuardado + "<br>");
+	document.write("La altura del alumno no binario más joven es " + alturaJovenGuardado + " y su nota es " + notaJovenGuardado + "<br>");
+	document.write("El nombre de la mujer más alta que aprobó es " + nombreMujerAltaGuardado + "<br>");
+	document.write("El porcentaje de alumnos desaprobados es " + porcentajeDesaprobados + "% <br>");
+	document.write("El nombre del primer hombre desaprobado y con una altura menor a 160 es " + nombreDesaprobadoGuardado + "<br>");
+
+}
+
+/*
+while(isNaN(numeroIngresado"X")==true) => while(isNaN(numeroIngresado))
+{
+	lo que haga que itere hasta que el valor sea falso.
+}
+
+			
+			else
+			{
+				if(sexoAcumuladorM == sexoAcumuladorF)
+				{
+					sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y femeninos que no binarios.";
+				}
+				else
+				{
+					if(sexoAcumuladorM == sexoAcumuladorNB)
+					{
+						sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y no binarios que femeninos.";
+					}
+					else
+					{
+						sexoMayor = "Hay misma cantidad mayor de alumnos femeninos y no binarios que masculinos.";
+					}
+				}
+			}
+		}
+	}*/
+
+//Guardado
 /*Ejercicio While 07 V1 (Realizar en los archivos del ejercicio 07 del WHILE)
 Realizar el algoritmo que permita el ingreso por prompt de
 	1-alturas en centimetros (validar entre 0 y 250),
@@ -61,7 +301,7 @@ informar :
 	*sobre los que tienen fiebre .
 	*y también sobre el total de Alumnos. */
 /*Pereyra Ian
-Div D Ejercicio 3 (Sabado)*/
+Div D Ejercicio 3 (Sabado)
 
 function mostrar()
 {
@@ -249,31 +489,4 @@ function mostrar()
 
 	alert(mensaje);
 }
-
-/*
-while(isNaN(numeroIngresado"X")==true) => while(isNaN(numeroIngresado))
-{
-	lo que haga que itere hasta que el valor sea falso.
-}
-
-			
-			else
-			{
-				if(sexoAcumuladorM == sexoAcumuladorF)
-				{
-					sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y femeninos que no binarios.";
-				}
-				else
-				{
-					if(sexoAcumuladorM == sexoAcumuladorNB)
-					{
-						sexoMayor = "Hay misma cantidad mayor de alumnos masculinos y no binarios que femeninos.";
-					}
-					else
-					{
-						sexoMayor = "Hay misma cantidad mayor de alumnos femeninos y no binarios que masculinos.";
-					}
-				}
-			}
-		}
-	}*/
+*/
